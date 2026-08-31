@@ -37,8 +37,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="pt-BR"
       className={`dark ${outfit.variable} ${cormorant.variable} ${plex.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="bg-background min-h-full text-foreground">
+      <body
+        className="bg-background min-h-full text-foreground"
+        suppressHydrationWarning
+      >
         <div className="film-grain" aria-hidden />
         <SiteCursor />
         <SmoothScroll>

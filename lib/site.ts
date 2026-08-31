@@ -1,0 +1,21 @@
+export const site = {
+  name: "Daniel",
+  fullName: "Daniel Toledo",
+  role: "Reforma e revenda",
+  tagline: "House Flipping",
+  city: "Brasília",
+  state: "DF",
+  whatsappLabel: "+55 61 99999-0000",
+  whatsappHref: "https://wa.me/5561999990000",
+  email: "daniel@placeholder.com.br",
+  instagramHref: "https://www.instagram.com/tldhouseflipping/",
+  instagramHandle: "@tldhouseflipping",
+  neighborhoods: [
+    "Asa Norte",
+    "Asa Sul",
+    "Lago Sul",
+    "Sudoeste",
+    "Noroeste",
+    "Park Way",
+  ],
+} as const

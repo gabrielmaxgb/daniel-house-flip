@@ -12,10 +12,15 @@ export type Project = {
   after: string
 }
 
+type ProjectCatalog = {
+  projects: Project[]
+}
+
 const u = (id: string, w = 2000) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=82`
 
-export const projects: Project[] = [
+/** Placeholders while R2 is not configured or media is missing locally. */
+export const fallbackProjects: Project[] = [
   {
     id: "sqn-209",
     index: "01",
@@ -95,3 +100,69 @@ export const projects: Project[] = [
     after: u("photo-1600607687920-4e2a09cf159d"),
   },
 ]
+
+function resolveAssetUrl(path: string, baseUrl: string): string {
+  if (/^https?:\/\//i.test(path)) return path
+  const base = baseUrl.replace(/\/$/, "")
+  return `${base}/${path.replace(/^\//, "")}`
+}
+
+function resolveProjects(projects: Project[], baseUrl: string): Project[] {
+  return projects.map((project) => ({
+    ...project,
+    image: resolveAssetUrl(project.image, baseUrl),
+    before: resolveAssetUrl(project.before, baseUrl),
+    after: resolveAssetUrl(project.after, baseUrl),
+  }))
+}
+
+function getProjectsJsonUrl(): string | null {
+  if (process.env.PROJECTS_JSON_URL) {
+    return process.env.PROJECTS_JSON_URL
+  }
+
+  const base = process.env.NEXT_PUBLIC_R2_PUBLIC_URL?.replace(/\/$/, "")
+  if (!base) return null
+
+  return `${base}/projects.json`
+}
+
+export async function getProjects(): Promise<Project[]> {
+  const jsonUrl = getProjectsJsonUrl()
+  const baseUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL?.replace(/\/$/, "")
+
+  if (jsonUrl && baseUrl) {
+    try {
+      const response = await fetch(jsonUrl, {
+        next: { revalidate: 60 },
+      })
+
+      if (response.ok) {
+        const catalog = (await response.json()) as ProjectCatalog
+        if (Array.isArray(catalog.projects) && catalog.projects.length > 0) {
+          const projects = resolveProjects(catalog.projects, baseUrl)
+
+          if (process.env.PROJECTS_MEDIA_ON_R2 === "true") {
+            return projects
+          }
+
+          return projects.map((project) => {
+            const fallback = fallbackProjects.find((item) => item.id === project.id)
+            if (!fallback) return project
+
+            return {
+              ...project,
+              image: fallback.image,
+              before: fallback.before,
+              after: fallback.after,
+            }
+          })
+        }
+      }
+    } catch {
+      // Fall back to placeholders when R2 is unreachable.
+    }
+  }
+
+  return fallbackProjects
+}

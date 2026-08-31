@@ -1,0 +1,82 @@
+{
+  "projects": [
+    {
+      "id": "sqn-209",
+      "index": "01",
+      "title": "SQN 209",
+      "neighborhood": "Asa Norte",
+      "year": 2024,
+      "duration": "4 meses",
+      "area": "186 m²",
+      "what": "Reforma de fachada, pisos, cozinha e instalações elétricas. O imóvel estava desocupado desde o inventário.",
+      "image": "media/sqn-209/cover.webp",
+      "before": "media/sqn-209/before.webp",
+      "after": "media/sqn-209/after.webp"
+    },
+    {
+      "id": "lago-sul",
+      "index": "02",
+      "title": "QI 15",
+      "neighborhood": "Lago Sul",
+      "year": 2025,
+      "duration": "6 meses",
+      "area": "320 m²",
+      "what": "Reforma integral: jardim, suíte principal e área gourmet.",
+      "image": "media/lago-sul/cover.webp",
+      "before": "media/lago-sul/before.webp",
+      "after": "media/lago-sul/after.webp"
+    },
+    {
+      "id": "sudoeste",
+      "index": "03",
+      "title": "CLSW 103",
+      "neighborhood": "Sudoeste",
+      "year": 2024,
+      "duration": "3 meses",
+      "area": "98 m²",
+      "what": "Reorganização do layout, iluminação e banheiros. Apartamento de 98 m².",
+      "image": "media/sudoeste/cover.webp",
+      "before": "media/sudoeste/before.webp",
+      "after": "media/sudoeste/after.webp"
+    },
+    {
+      "id": "park-way",
+      "index": "04",
+      "title": "Conjunto 8",
+      "neighborhood": "Park Way",
+      "year": 2025,
+      "duration": "5 meses",
+      "area": "240 m²",
+      "what": "Ampliação da sala e substituição das esquadrias. Casa em fundo de lote.",
+      "image": "media/park-way/cover.webp",
+      "before": "media/park-way/before.webp",
+      "after": "media/park-way/after.webp"
+    },
+    {
+      "id": "asa-sul",
+      "index": "05",
+      "title": "SQS 308",
+      "neighborhood": "Asa Sul",
+      "year": 2023,
+      "duration": "4 meses",
+      "area": "142 m²",
+      "what": "Estrutura preservada; acabamentos refeitos. Superquadra, quatro meses de obra.",
+      "image": "media/asa-sul/cover.webp",
+      "before": "media/asa-sul/before.webp",
+      "after": "media/asa-sul/after.webp"
+    },
+    {
+      "id": "noroeste",
+      "index": "06",
+      "title": "SQNW 107",
+      "neighborhood": "Noroeste",
+      "year": 2025,
+      "duration": "4 meses",
+      "area": "168 m²",
+      "what": "Unidade entregue incompleta. Conclusão dos acabamentos deixados em aberto pela construtora.",
+      "image": "media/noroeste/cover.webp",
+      "before": "media/noroeste/before.webp",
+      "after": "media/noroeste/after.webp"
+    }
+  ]
+}

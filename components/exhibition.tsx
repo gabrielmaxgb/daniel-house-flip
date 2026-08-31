@@ -13,7 +13,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useLenis } from "lenis/react"
 import { XIcon } from "lucide-react"
-import { projects, type Project } from "@/lib/projects"
+import type { Project } from "@/lib/projects"
 import { setCursorOverride } from "@/lib/cursor"
 import { useReducedMotion } from "@/lib/use-reduced-motion"
 
@@ -27,7 +27,7 @@ type OpenState = {
   thumb: HTMLElement
 }
 
-export function Exhibition() {
+export function Exhibition({ projects }: { projects: Project[] }) {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const activeRef = useRef(0)
@@ -221,6 +221,7 @@ export function Exhibition() {
         ? createPortal(
             <ProjectOverlay
               state={open}
+              projects={projects}
               reduced={reduced}
               onClosed={() => {
                 open.thumb.style.opacity = ""
@@ -237,10 +238,12 @@ export function Exhibition() {
 
 function ProjectOverlay({
   state,
+  projects,
   reduced,
   onClosed,
 }: {
   state: OpenState
+  projects: Project[]
   reduced: boolean
   onClosed: () => void
 }) {

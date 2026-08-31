@@ -1,7 +1,6 @@
 "use client"
 
 import { site } from "@/lib/site"
-import { InstagramCta } from "@/components/instagram-cta"
 
 export function Contact() {
   return (
@@ -22,12 +21,12 @@ export function Contact() {
         </p>
       </div>
 
-      <div className="mt-24 grid gap-12 md:grid-cols-3">
+      <div className="mt-24 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         <a
           href={site.whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="group cursor-pointer border-t border-cream/15 pt-6"
+          className="group min-w-0 cursor-pointer border-t border-cream/15 pt-6"
         >
           <span className="flex items-center gap-2 font-sans text-[11px] tracking-[0.28em] text-cream/50 uppercase">
             <svg
@@ -39,26 +38,63 @@ export function Contact() {
             </svg>
             WhatsApp
           </span>
-          <span className="mt-4 block font-serif text-3xl font-light text-cream transition-colors group-hover:text-burgundy md:text-5xl">
+          <span className="mt-4 block font-serif text-2xl leading-tight font-light break-words text-cream transition-colors group-hover:text-burgundy md:text-3xl xl:text-4xl">
             {site.whatsappLabel}
           </span>
         </a>
+
         <a
           href={`mailto:${site.email}`}
-          className="group cursor-pointer border-t border-cream/15 pt-6"
+          className="group min-w-0 cursor-pointer border-t border-cream/15 pt-6"
         >
-          <span className="font-sans text-[11px] tracking-[0.28em] text-cream/50 uppercase">
+          <span className="flex items-center gap-2 font-sans text-[11px] tracking-[0.28em] text-cream/50 uppercase">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden
+              className="size-3.5 shrink-0 fill-none stroke-current"
+              strokeWidth="1.5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 7.5h18v9a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 16.5v-9z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 8.25L12 13.5l8.25-5.25"
+              />
+            </svg>
             E-mail
           </span>
-          <span className="mt-4 block font-serif text-3xl font-light text-cream transition-colors group-hover:text-burgundy md:text-5xl">
+          <span className="mt-4 block font-serif text-2xl leading-tight font-light break-all text-cream transition-colors group-hover:text-burgundy md:text-3xl xl:text-4xl">
             {site.email}
           </span>
         </a>
-        <InstagramCta
-          title={site.instagramHandle}
-          description={site.instagramTagline}
-          className="md:col-span-1"
-        />
+
+        <a
+          href={site.instagramHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group min-w-0 cursor-pointer border-t border-cream/15 pt-6 sm:col-span-2 lg:col-span-1"
+        >
+          <span className="flex items-center gap-2 font-sans text-[11px] tracking-[0.28em] text-cream/50 uppercase">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden
+              className="size-3.5 shrink-0 fill-current"
+            >
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+            Instagram
+          </span>
+          <span className="mt-4 block font-serif text-2xl leading-tight font-light break-words text-cream transition-colors group-hover:text-burgundy md:text-3xl xl:text-4xl">
+            {site.instagramHandle}
+          </span>
+          <span className="mt-3 block font-sans text-sm leading-relaxed text-cream/55">
+            {site.instagramTagline}
+          </span>
+        </a>
       </div>
 
       <p className="mt-24 font-mono text-[10px] tracking-[0.22em] text-cream/35 uppercase">

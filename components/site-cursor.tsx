@@ -3,18 +3,7 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { useReducedMotion } from "@/lib/use-reduced-motion"
-
-const HIT = "a[href], button:not(:disabled), [role='button'], [data-cursor]"
-
-function modeFrom(target: EventTarget | null) {
-  if (!(target instanceof Element)) return "default"
-  const hit = target.closest(HIT)
-  if (!hit) return "default"
-  if (hit.closest("[data-cursor='view']") || hit.getAttribute("data-cursor") === "view") {
-    return "view"
-  }
-  return "hover"
-}
+import { resolveCursorMode } from "@/lib/cursor"
 
 export function SiteCursor() {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -54,15 +43,15 @@ export function SiteCursor() {
       dotY(e.clientY)
       ringX(e.clientX)
       ringY(e.clientY)
-      root.dataset.mode = modeFrom(e.target)
+      root.dataset.mode = resolveCursorMode(e.target)
     }
 
     const onOver = (e: PointerEvent) => {
-      root.dataset.mode = modeFrom(e.target)
+      root.dataset.mode = resolveCursorMode(e.target)
     }
 
     const onOut = (e: PointerEvent) => {
-      root.dataset.mode = modeFrom(e.relatedTarget)
+      root.dataset.mode = resolveCursorMode(e.relatedTarget)
     }
 
     window.addEventListener("pointermove", onMove)

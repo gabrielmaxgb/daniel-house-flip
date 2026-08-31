@@ -223,29 +223,30 @@ html.lenis body {
 .site-cursor[data-mode="view"] .site-cursor__ring {
   width: 96px;
   height: 96px;
-  background: rgb(12 11 10 / 48%);
-  border-color: rgb(232 224 212 / 32%);
+  background: rgb(12 11 10 / 72%);
+  border-color: rgb(232 224 212 / 45%);
   mix-blend-mode: normal;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
 }
 
 .site-cursor[data-mode="view"] .site-cursor__label {
   opacity: 1;
+  color: var(--cream);
 }
 
 .daniel-portrait img {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 22%,
-    black 88%,
+    black 14%,
+    black 86%,
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 22%,
-    black 88%,
+    black 14%,
+    black 86%,
     transparent 100%
   );
 }
@@ -255,17 +256,19 @@ html.lenis body {
     -webkit-mask-image: linear-gradient(
         to right,
         transparent 0%,
-        black 18%,
-        black 100%
+        black 12%,
+        black 88%,
+        transparent 100%
       ),
-      linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
+      linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
     mask-image: linear-gradient(
         to right,
         transparent 0%,
-        black 18%,
-        black 100%
+        black 12%,
+        black 88%,
+        transparent 100%
       ),
-      linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
+      linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
   }
 }
 

@@ -27,7 +27,7 @@ export function DanielPage() {
       }
 
       gsap.from(".daniel-still", {
-        scale: 1.06,
+        scale: 1.03,
         duration: 2.2,
         ease: "power3.out",
       })
@@ -47,31 +47,8 @@ export function DanielPage() {
 
   return (
     <article ref={root} className="bg-ink">
-      <div className="relative lg:grid lg:min-h-dvh lg:grid-cols-12">
-        <figure className="daniel-portrait relative h-[72vh] overflow-hidden lg:absolute lg:inset-y-0 lg:right-0 lg:left-[28%] lg:h-full lg:w-auto">
-          <Image
-            src="/daniel-toledo.png"
-            alt={`${site.fullName}, house flipper em ${site.city}`}
-            fill
-            priority
-            sizes="(min-width: 1024px) 72vw, 100vw"
-            className="daniel-still object-cover object-[center_14%] saturate-[0.88] lg:object-[62%_14%]"
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink via-transparent to-ink"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-transparent lg:from-ink lg:via-ink/20 lg:to-transparent"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_70%_38%,transparent_0%,#0c0b0a_100%)] opacity-90 lg:bg-[radial-gradient(ellipse_65%_60%_at_58%_40%,transparent_0%,#0c0b0a_100%)]"
-            aria-hidden
-          />
-        </figure>
-
-        <div className="relative z-10 flex flex-col justify-end px-5 pt-10 pb-20 lg:col-span-5 lg:col-start-1 lg:justify-center lg:px-10 lg:py-32 xl:col-span-4">
+      <div className="relative lg:grid lg:min-h-dvh lg:grid-cols-12 lg:items-center lg:gap-6 xl:gap-10">
+        <div className="relative z-10 order-2 flex flex-col justify-end px-5 pb-20 lg:order-none lg:col-span-5 lg:col-start-1 lg:row-start-1 lg:justify-center lg:px-10 lg:py-32">
           <p className="daniel-reveal font-sans text-[11px] tracking-[0.32em] text-burgundy uppercase">
             Sobre
           </p>
@@ -160,6 +137,31 @@ export function DanielPage() {
           >
             Ver obras
           </Link>
+        </div>
+
+        <div className="daniel-reveal order-1 flex justify-center px-5 pt-8 lg:order-none lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:items-center lg:justify-center lg:px-10 lg:pt-0">
+          <figure className="daniel-portrait relative mx-auto h-[56vh] max-h-[500px] w-full max-w-md overflow-hidden sm:max-w-lg lg:h-[min(82vh,720px)] lg:max-h-[720px] lg:w-full lg:max-w-[28rem]">
+            <Image
+              src="/daniel-toledo.png"
+              alt={`${site.fullName}, house flipper em ${site.city}`}
+              fill
+              priority
+              sizes="(min-width: 1024px) 28rem, 100vw"
+              className="daniel-still object-cover object-[center_18%] saturate-[0.88]"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink via-transparent to-ink"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink via-ink/20 to-transparent"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_65%_at_50%_42%,transparent_0%,#0c0b0a_100%)] opacity-80"
+              aria-hidden
+            />
+          </figure>
         </div>
       </div>
     </article>

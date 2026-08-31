@@ -14,6 +14,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useLenis } from "lenis/react"
 import { XIcon } from "lucide-react"
 import { projects, type Project } from "@/lib/projects"
+import { setCursorOverride } from "@/lib/cursor"
 import { useReducedMotion } from "@/lib/use-reduced-motion"
 
 if (typeof window !== "undefined") {
@@ -169,6 +170,8 @@ export function Exhibition() {
                   const thumb = e.currentTarget.querySelector("[data-thumb]")
                   if (thumb instanceof HTMLElement) openProject(project, thumb)
                 }}
+                onPointerEnter={() => setCursorOverride("view")}
+                onPointerLeave={() => setCursorOverride(null)}
               >
                 <figure>
                   <div

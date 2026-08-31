@@ -10,6 +10,7 @@ export const site = {
   email: "daniel@placeholder.com.br",
   instagramHref: "https://www.instagram.com/tldhouseflipping/",
   instagramHandle: "@tldhouseflipping",
+  instagramTagline: "Arquivo completo de obras no Instagram.",
   neighborhoods: [
     "Asa Norte",
     "Asa Sul",

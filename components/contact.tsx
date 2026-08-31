@@ -1,6 +1,7 @@
 "use client"
 
 import { site } from "@/lib/site"
+import { InstagramCta } from "@/components/instagram-cta"
 
 export function Contact() {
   return (
@@ -17,11 +18,11 @@ export function Contact() {
         </h2>
         <p className="mt-8 max-w-md font-sans text-base leading-relaxed text-cream/65">
           Para apresentar um imóvel em {site.city} ou tratar de um projeto.
-          WhatsApp ou e-mail.
+          WhatsApp, e-mail ou Instagram.
         </p>
       </div>
 
-      <div className="mt-24 grid gap-12 md:grid-cols-2">
+      <div className="mt-24 grid gap-12 md:grid-cols-3">
         <a
           href={site.whatsappHref}
           target="_blank"
@@ -53,6 +54,11 @@ export function Contact() {
             {site.email}
           </span>
         </a>
+        <InstagramCta
+          title={site.instagramHandle}
+          description={site.instagramTagline}
+          className="md:col-span-1"
+        />
       </div>
 
       <p className="mt-24 font-mono text-[10px] tracking-[0.22em] text-cream/35 uppercase">

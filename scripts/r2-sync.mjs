@@ -3,6 +3,9 @@
 /**
  * Sync data/projects.json + data/media/** to Cloudflare R2.
  *
+ * Dormant by default — site uses featuredProjects in lib/projects.ts.
+ * Enable on the site with PROJECTS_SOURCE=r2 (+ optional PROJECTS_MEDIA_ON_R2=true).
+ *
  * Required env (.env.local):
  *   R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME
  *

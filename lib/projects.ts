@@ -19,8 +19,11 @@ type ProjectCatalog = {
 const u = (id: string, w = 2000) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=82`
 
-/** Placeholders while R2 is not configured or media is missing locally. */
-export const fallbackProjects: Project[] = [
+/**
+ * Vitrine local — obras em destaque no site.
+ * Troque por `/obras/<id>.webp` em public/ quando tiver fotos reais.
+ */
+export const featuredProjects: Project[] = [
   {
     id: "sqn-209",
     index: "01",
@@ -61,21 +64,8 @@ export const fallbackProjects: Project[] = [
     after: u("photo-1600566753086-00f18fb6b3ea"),
   },
   {
-    id: "park-way",
-    index: "04",
-    title: "Conjunto 8",
-    neighborhood: "Park Way",
-    year: 2025,
-    duration: "5 meses",
-    area: "240 m²",
-    what: "Ampliação da sala e substituição das esquadrias. Casa em fundo de lote.",
-    image: u("photo-1600585154526-990dced4db0d"),
-    before: u("photo-1564013799919-ab600027ffc6"),
-    after: u("photo-1600047509782-20d39509f26d"),
-  },
-  {
     id: "asa-sul",
-    index: "05",
+    index: "04",
     title: "SQS 308",
     neighborhood: "Asa Sul",
     year: 2023,
@@ -85,19 +75,6 @@ export const fallbackProjects: Project[] = [
     image: u("photo-1613977257363-707ba9348227"),
     before: u("photo-1505693416388-ac5ce068fe85"),
     after: u("photo-1600573472592-401b489a3cdc"),
-  },
-  {
-    id: "noroeste",
-    index: "06",
-    title: "SQNW 107",
-    neighborhood: "Noroeste",
-    year: 2025,
-    duration: "4 meses",
-    area: "168 m²",
-    what: "Unidade entregue incompleta. Conclusão dos acabamentos deixados em aberto pela construtora.",
-    image: u("photo-1600566753190-17f0baa2a6c3"),
-    before: u("photo-1522708323590-d24dbb6b0267"),
-    after: u("photo-1600607687920-4e2a09cf159d"),
   },
 ]
 
@@ -127,42 +104,51 @@ function getProjectsJsonUrl(): string | null {
   return `${base}/projects.json`
 }
 
-export async function getProjects(): Promise<Project[]> {
+/** Dormant — ative com PROJECTS_SOURCE=r2 no .env */
+async function fetchProjectsFromR2(): Promise<Project[] | null> {
   const jsonUrl = getProjectsJsonUrl()
   const baseUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL?.replace(/\/$/, "")
+  if (!jsonUrl || !baseUrl) return null
 
-  if (jsonUrl && baseUrl) {
-    try {
-      const response = await fetch(jsonUrl, {
-        next: { revalidate: 60 },
-      })
+  try {
+    const response = await fetch(jsonUrl, {
+      next: { revalidate: 60 },
+    })
 
-      if (response.ok) {
-        const catalog = (await response.json()) as ProjectCatalog
-        if (Array.isArray(catalog.projects) && catalog.projects.length > 0) {
-          const projects = resolveProjects(catalog.projects, baseUrl)
+    if (!response.ok) return null
 
-          if (process.env.PROJECTS_MEDIA_ON_R2 === "true") {
-            return projects
-          }
-
-          return projects.map((project) => {
-            const fallback = fallbackProjects.find((item) => item.id === project.id)
-            if (!fallback) return project
-
-            return {
-              ...project,
-              image: fallback.image,
-              before: fallback.before,
-              after: fallback.after,
-            }
-          })
-        }
-      }
-    } catch {
-      // Fall back to placeholders when R2 is unreachable.
+    const catalog = (await response.json()) as ProjectCatalog
+    if (!Array.isArray(catalog.projects) || catalog.projects.length === 0) {
+      return null
     }
+
+    const projects = resolveProjects(catalog.projects, baseUrl)
+
+    if (process.env.PROJECTS_MEDIA_ON_R2 === "true") {
+      return projects
+    }
+
+    return projects.map((project) => {
+      const local = featuredProjects.find((item) => item.id === project.id)
+      if (!local) return project
+
+      return {
+        ...project,
+        image: local.image,
+        before: local.before,
+        after: local.after,
+      }
+    })
+  } catch {
+    return null
+  }
+}
+
+export async function getProjects(): Promise<Project[]> {
+  if (process.env.PROJECTS_SOURCE === "r2") {
+    const remote = await fetchProjectsFromR2()
+    if (remote) return remote
   }
 
-  return fallbackProjects
+  return featuredProjects
 }

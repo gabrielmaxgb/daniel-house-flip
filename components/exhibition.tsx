@@ -14,6 +14,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useLenis } from "lenis/react"
 import { XIcon } from "lucide-react"
 import type { Project } from "@/lib/projects"
+import { site } from "@/lib/site"
+import { InstagramCta } from "@/components/instagram-cta"
 import { setCursorOverride } from "@/lib/cursor"
 import { useReducedMotion } from "@/lib/use-reduced-motion"
 
@@ -145,11 +147,23 @@ export function Exhibition({ projects }: { projects: Project[] }) {
             Exposição
           </p>
           <h2 className="mt-6 font-serif text-6xl leading-[0.9] font-light text-cream italic md:text-8xl">
-            Obras em Brasília.
+            Seleção de obras.
           </h2>
           <p className="mt-8 max-w-sm font-sans text-sm leading-relaxed text-cream/55">
-            Seis imóveis reformados e revendidos entre 2023 e 2025.
+            Quatro projetos em destaque em {site.city}. O arquivo completo — antes,
+            depois e obras em andamento — está no Instagram.
           </p>
+          <a
+            href={site.instagramHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-flex cursor-pointer items-center gap-2 font-sans text-[11px] tracking-[0.28em] text-cream/50 uppercase transition-colors hover:text-cream"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden className="size-3.5 fill-current">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+            {site.instagramHandle}
+          </a>
         </div>
 
         {projects.map((project, i) => {
@@ -204,6 +218,15 @@ export function Exhibition({ projects }: { projects: Project[] }) {
             </article>
           )
         })}
+
+        <div className="flex h-full w-[min(72vw,520px)] shrink-0 items-center px-4 md:px-10">
+          <InstagramCta
+            size="large"
+            title="Ver todas as obras"
+            description={`${site.instagramTagline} Antes, depois e reformas em andamento.`}
+            className="max-w-md border-t-0 pt-0"
+          />
+        </div>
 
         <div className="w-[18vw] shrink-0" aria-hidden />
       </div>
@@ -448,32 +471,11 @@ function ProjectOverlay({
           </div>
         </dl>
 
-        <div className="mt-12 grid grid-cols-2 gap-3">
-          <figure className="relative aspect-4/5 overflow-hidden">
-            <Image
-              src={project.before}
-              alt={`Antes, ${project.title}`}
-              fill
-              sizes="30vw"
-              className="object-cover saturate-50"
-            />
-            <figcaption className="absolute bottom-3 left-3 font-mono text-[10px] tracking-[0.2em] text-cream uppercase">
-              Antes
-            </figcaption>
-          </figure>
-          <figure className="relative aspect-4/5 overflow-hidden">
-            <Image
-              src={project.after}
-              alt={`Depois, ${project.title}`}
-              fill
-              sizes="30vw"
-              className="object-cover"
-            />
-            <figcaption className="absolute bottom-3 left-3 font-mono text-[10px] tracking-[0.2em] text-cream uppercase">
-              Depois
-            </figcaption>
-          </figure>
-        </div>
+        <InstagramCta
+          title="Ver antes e depois"
+          description="Fotos completas desta obra e de outras reformas no Instagram."
+          className="mt-12"
+        />
       </div>
     </div>
   )
